@@ -1,14 +1,15 @@
 import express from "express";
-import thumbs from "./api/thumbs";
 import images from "./api/images";
 
 const routes = express.Router();
 
-routes.get('/', (req,res) =>{
-	res.send('main api route');
+routes.get('/', (req,res):void =>{
+	res.send("Main api route.  Go to api/images for list of stored files"  +
+			 " and then api/images/filename for a specific file.  <br>To resize a file" +
+			 " use query strings on the filename path.  <br>As an example visit" +
+			 " api/images/image1.jpg?width=600&height=400.");
 });
 
 routes.use('/images', images);
-routes.use('/thumbs', thumbs);
 
 export default routes;
