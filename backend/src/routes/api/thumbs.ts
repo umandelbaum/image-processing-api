@@ -28,6 +28,12 @@ thumbs.get('/:id', async (req,res) => {
 	//Get width and height parameters, if they exist
 	const width = req.query.width ? req.query.width as string : '600';
 	const height = req.query.height ? req.query.height as string : '400';
+
+	//Perfrom error checking on width/height
+	if (isNaN(Number(width)) || isNaN(Number(height))){
+		res.status(422).json("improper query parameters");
+	}
+
 	const thumbname = req.params.id.slice(0,-4) + width + 'x' + height + req.params.id.slice(-4);
 	const thumbPath = path.join(thumbsPath, thumbname);
 
